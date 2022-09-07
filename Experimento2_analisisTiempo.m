@@ -6,6 +6,7 @@ clear input;
 
 path    = "Grabaciones/";
 users   = ["Abraham" "Alejandro" "Alfredo" "Paco" "Pablo"];
+user_labels = ["Abraham" "Alejandro" "Alfredo" "Francisco" "Pablo"];
 
 means = [zeros(1,50); zeros(1,50); zeros(1,50); zeros(1,50); zeros(1,50)];
 
@@ -28,6 +29,22 @@ for i=1:length(users)
         disps(i,j) = var(Signal)/std(Signal);
     end
 end 
+
+%% Graficar algunas señales
+
+for i=1:length(users)
+    for j=1:3
+        subplot(length(users),3,3*(i-1)+j);
+        n = randi(50);
+        filename = path + users(i)+"/"+ users(i) + num2str(n) + ".wav";
+        [Signal,SampleRate] = audioread(filename);
+        dt = 1/SampleRate;
+        t = 0:dt:(length(Signal)*dt)-dt;
+        plot(t, Signal);
+        title(user_labels(i)+' #'+n);
+    end
+end
+
 %% Formateo de Tablas
 labels  = {'Promedio', 'Desviación Estandar', 'Curtosis', 'Asimetría', 'Dispersión'};
 TablaAbraham = table(transpose(means(1, :)), transpose(std_devs(1, :)), transpose(ks(1, :)), transpose(skews(1,:)), transpose(disps(1, :)));
