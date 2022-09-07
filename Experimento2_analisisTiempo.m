@@ -70,35 +70,35 @@ TablaPablo.Properties.VariableNames = labels;
 %% Exportación a Latex
 clc
 input.dataFormat = {'%.4E',1,'%.4f',4};
-input.data = TablaAbraham;
+input.data = TablaAbraham(1:10,:);
 input.transposeTable = 0;
 latex1 = latexTable(input);
 pause()
 
 clc
 input.dataFormat = {'%.4E',1,'%.4f',4};
-input.data = TablaAlejandro;
+input.data = TablaAlejandro(1:10,:);
 input.transposeTable = 0;
 latex2 = latexTable(input);
 pause()
 
 clc
 input.dataFormat = {'%.4E',1,'%.4f',4};
-input.data = TablaAlfredo;
+input.data = TablaAlfredo(1:10,:);
 input.transposeTable = 0;
 latex3 = latexTable(input);
 pause()
 
 clc
 input.dataFormat = {'%.4E',1,'%.4f',4};
-input.data = TablaPaco;
+input.data = TablaPaco(1:10,:);
 input.transposeTable = 0;
 latex4 = latexTable(input);
 pause()
 
 clc
 input.dataFormat = {'%.4E',1,'%.4f',4};
-input.data = TablaPablo;
+input.data = TablaPablo(1:10,:);
 input.transposeTable = 0;
 latex5 = latexTable(input);
 pause()
