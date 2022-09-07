@@ -50,12 +50,27 @@ for i=1:length(users)
 end
 
 for i=1:length(users)
-    meanDominantFreq(i) = mean(dominantFreq(i));
+    meanDominantFreq(i) = mean(dominantFreq(i,:));
 end
 user_labels = categorical(["Abraham" "Alejandro" "Alfredo" "Francisco" "Pablo"]);
 figure
 bar(user_labels,meanDominantFreq)
 title("Frecuencia Dominante Promedio por Persona")
+AbrahamDomFreqMean = meanDominantFreq(1);
+AbrahamDomFreqStd = std(dominantFreq(1));
+AlejandroDomFreqMean = meanDominantFreq(2);
+AlejandroDomFreqStd = std(dominantFreq(2));
+AlfredoDomFreqMean = meanDominantFreq(3);
+AlfredoDomFreqStd = std(dominantFreq(3));
+FranciscoDomFreqMean = meanDominantFreq(4);
+FranciscoDomFreqStd = std(dominantFreq(4));
+PabloDomFreqMean = meanDominantFreq(5);
+PabloDomFreqStd = std(dominantFreq(5));
+
+AbrahamNormDist = normpdf(0:1:1300,AbrahamDomFreqMean,AbrahamDomFreqStd);
+%plot(AbrahamNormDist);
+
+pause();
 
 %% Formateo de Tablas
 labels  = {'Promedio', 'Desviación Estandar', 'Curtosis', 'Asimetría', 'Dispersión'};
