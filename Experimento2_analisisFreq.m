@@ -39,11 +39,11 @@ for i=1:length(users)
         axis([0 1.5*10^4 0 80])
         hold on
 
-%         means(i,j)= mean(power.*freq);
-%         std_devs(i,j) = std(power.*freq);
-%         skews(i,j) = skewness(power.*freq);
-%         ks(i,j) = kurtosis(power.*freq);
-%         disps(i,j) = var(power.*freq)./std(power.*freq);
+        means(i,j)= mean(power);
+        std_devs(i,j) = std(power);
+        skews(i,j) = skewness(power);
+        ks(i,j) = kurtosis(power);
+        disps(i,j) = var(power)./std(power);
     end
     title(users(i))
 end
@@ -55,4 +55,61 @@ user_labels = categorical(["Abraham" "Alejandro" "Alfredo" "Francisco" "Pablo"])
 figure
 bar(user_labels,meanDominantFreq)
 title("Frecuencia Dominante Promedio por Persona")
+
+%% Formateo de Tablas
+labels  = {'Promedio', 'Desviación Estandar', 'Curtosis', 'Asimetría', 'Dispersión'};
+TablaAbraham = table(transpose(means(1, :)), transpose(std_devs(1, :)), transpose(ks(1, :)), transpose(skews(1,:)), transpose(disps(1, :)));
+TablaAbraham.Properties.VariableNames = labels;
+
+labels  = {'Promedio', 'Desviación Estandar', 'Curtosis', 'Asimetría', 'Dispersión'};
+TablaAlejandro = table(transpose(means(2, :)), transpose(std_devs(2, :)), transpose(ks(2, :)), transpose(skews(2,:)), transpose(disps(2, :)));
+TablaAlejandro.Properties.VariableNames = labels;
+
+labels  = {'Promedio', 'Desviación Estandar', 'Curtosis', 'Asimetría', 'Dispersión'};
+TablaAlfredo = table(transpose(means(3, :)), transpose(std_devs(3, :)), transpose(ks(3, :)), transpose(skews(3,:)), transpose(disps(3, :)));
+TablaAlfredo.Properties.VariableNames = labels;
+
+labels  = {'Promedio', 'Desviación Estandar', 'Curtosis', 'Asimetría', 'Dispersión'};
+TablaPaco = table(transpose(means(4, :)), transpose(std_devs(4, :)), transpose(ks(4, :)), transpose(skews(4,:)), transpose(disps(4, :)));
+TablaPaco.Properties.VariableNames = labels;
+
+labels  = {'Promedio', 'Desviación Estandar', 'Curtosis', 'Asimetría', 'Dispersión'};
+TablaPablo = table(transpose(means(5, :)), transpose(std_devs(5, :)), transpose(ks(5, :)), transpose(skews(5,:)), transpose(disps(5, :)));
+TablaPablo.Properties.VariableNames = labels;
+%% Exportación a Latex
+
+clc
+input.dataFormat = {'%.4f',2,'%.2f',1,'%.4f',2};
+input.data = TablaAbraham(1:10,:);
+input.transposeTable = 0;
+latex1 = latexTable(input);
+pause()
+
+clc
+input.dataFormat = {'%.4f',2,'%.2f',1,'%.4f',2};
+input.data = TablaAlejandro(1:10,:);
+input.transposeTable = 0;
+latex2 = latexTable(input);
+pause()
+
+clc
+input.dataFormat = {'%.4f',2,'%.2f',1,'%.4f',2};
+input.data = TablaAlfredo(1:10,:);
+input.transposeTable = 0;
+latex3 = latexTable(input);
+pause()
+
+clc
+input.dataFormat = {'%.4f',2,'%.2f',1,'%.4f',2};
+input.data = TablaPaco(1:10,:);
+input.transposeTable = 0;
+latex4 = latexTable(input);
+pause()
+
+clc
+input.dataFormat = {'%.4f',2,'%.2f',1,'%.4f',2};
+input.data = TablaPablo(1:10,:);
+input.transposeTable = 0;
+latex5 = latexTable(input);
+pause()
 
