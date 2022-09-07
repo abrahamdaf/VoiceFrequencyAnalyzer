@@ -36,6 +36,7 @@ for i=1:length(users)
         dominantFreq(i,j)  = maxFreq;
 
         plot(freq,power)
+        xlabel("Frecuencia");ylabel("Amplitud")
         axis([0 1.5*10^4 0 80])
         hold on
 

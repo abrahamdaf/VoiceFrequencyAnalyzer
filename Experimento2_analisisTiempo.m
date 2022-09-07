@@ -22,6 +22,7 @@ for i=1:length(users)
     for j=1:50
         filename = path + users(i)+"/"+ users(i) + num2str(j) + ".wav";
         [Signal,SampleRate] = audioread(filename);
+        Signal = abs(Signal);
         means(i,j)= mean(Signal);
         std_devs(i,j) = std(Signal);
         skews(i,j) = skewness(Signal);
@@ -33,8 +34,8 @@ end
 %% Graficar algunas señales
 
 for i=1:length(users)
-    for j=1:3
-        subplot(length(users),3,3*(i-1)+j);
+    for j=1:2
+        subplot(length(users),2,2*(i-1)+j);
         n = randi(50);
         filename = path + users(i)+"/"+ users(i) + num2str(n) + ".wav";
         [Signal,SampleRate] = audioread(filename);
@@ -42,6 +43,7 @@ for i=1:length(users)
         t = 0:dt:(length(Signal)*dt)-dt;
         plot(t, Signal);
         title(user_labels(i)+' #'+n);
+        xlabel("Tiempo");ylabel("Amplitud")
     end
 end
 
