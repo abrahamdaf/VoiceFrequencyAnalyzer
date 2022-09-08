@@ -19,7 +19,7 @@ dominantFreq = [zeros(1,50); zeros(1,50); zeros(1,50); zeros(1,50); zeros(1,50)]
 
 meanDominantFreq = zeros(1,5);
 for i=1:length(users)
-    subplot(2,3,i);
+    figure
     for j=1:50
         filename = path + users(i)+"/"+ users(i) + num2str(j) + ".wav";
         [Signal,SampleRate] = audioread(filename);
@@ -31,13 +31,15 @@ for i=1:length(users)
         freq = (0:n-1)*(SampleRate/n);    
         power = abs(Fourier).^2/n;
 
+        power = 20*log10(power);
+
         [max_power, index] = max(power);
         maxFreq            = freq(index);
         dominantFreq(i,j)  = maxFreq;
 
         plot(freq,power)
-        xlabel("Frecuencia");ylabel("Amplitud")
-        axis([0 1.5*10^4 0 80])
+        xlabel("Frecuencia");ylabel("Amplitud (db)")
+        axis([0 8*10^3 0 50])
         hold on
 
         means(i,j)= mean(power);
@@ -56,6 +58,8 @@ user_labels = categorical(["Abraham" "Alejandro" "Alfredo" "Francisco" "Pablo"])
 figure
 bar(user_labels,meanDominantFreq)
 title("Frecuencia Dominante Promedio por Persona")
+xlabel("Usuarios");
+ylabel("Frecuencia");
 AbrahamDomFreqMean = meanDominantFreq(1);
 AbrahamDomFreqStd = std(dominantFreq(1,:));
 AlejandroDomFreqMean = meanDominantFreq(2);
@@ -86,6 +90,8 @@ plot(testedFreqs,AlejandroNormDist,"m",'DisplayName','Alejandro');
 plot(testedFreqs,AlfredoNormDist,"r",'DisplayName','Alfredo');
 plot(testedFreqs,FranciscoNormDist,"g",'DisplayName','Francisco');
 plot(testedFreqs,PabloNormDist,"k",'DisplayName','Pablo');
+xlabel("Frecuencia");
+ylabel("Probabilidad");
 legend(users)
 
 % disp("Predicción de voz, presiona cualquier tecla para grabar");
